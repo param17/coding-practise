@@ -10,17 +10,20 @@ A Node is defined as:
         Node next;
     }
 */
-
 boolean hasCycle(Node head) {
     if (head == null)
         return false;
-    Node current = head;
-    int count = 0;
-    while(current.next!=null){
-        count++;
-        if(count > 101)
-            return true;
-        current = current.next;
+    Node slow = head;
+    Node fast = head.next;
+    //int count = 0;
+    while(fast.next!=null && fast.next.next != null && slow!=fast){
+        //count++;
+        //if(count > 101)
+        //    return true;
+        fast = fast.next.next;
+        slow = slow.next;
     }
+    if(fast!=null && fast==slow)
+        return true;
     return false;
 }
