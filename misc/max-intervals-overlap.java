@@ -1,6 +1,3 @@
-//Maximum intervals overlap
-//http://practice.geeksforgeeks.org/problems/maximum-intervals-overlap/0
-
 import java.util.*;
 import java.lang.*;
 import java.io.*;
@@ -8,6 +5,32 @@ import java.io.*;
 class GFG {
     
     public static void maxOverlap(int n, int[] a, int[] b){
+        Arrays.sort(a);
+        Arrays.sort(b);
+        int guest_count=0;
+        int max_count=0,max_index=0;
+        int i=0,j=0;
+        while(i<n&&j<n){
+            if(a[i]<=b[j])
+            {
+                guest_count++;
+                i++;
+                
+                if(max_count<guest_count){
+                    max_count = guest_count;
+                    max_index = a[i-1];
+                }
+            }
+            else{
+                guest_count--;
+                j++;
+            }
+        }
+        
+        System.out.println(max_count+" "+max_index);
+    }
+    
+    public static void maxOverlapBruteForce(int n, int[] a, int[] b){
         HashMap<Integer, Integer> map = new HashMap<Integer, Integer>();
         int count = 0;
         for(int i=0;i<n;i++){
